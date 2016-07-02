@@ -1,5 +1,6 @@
 package org.habv.test.pippo.test.server;
 
+import com.jayway.restassured.filter.session.SessionFilter;
 import com.jayway.restassured.http.ContentType;
 import org.junit.Test;
 import static org.hamcrest.Matchers.*;
@@ -107,6 +108,59 @@ public class PippoApplicationTest extends PippoTest {
             .contentType(ContentType.HTML)
             .and()
             .body("html.body.h1",equalTo("Hello"));
+    }
+    
+    @Test
+    public void testSession() {
+        SessionFilter sessionFilter = new SessionFilter();
+        //SET
+        given()
+             .accept(ContentType.TEXT)
+             .filter(sessionFilter)
+        .when()
+            .get("/session/set")
+        .then()
+            .statusCode(200)
+            .and()
+            .contentType(ContentType.TEXT)
+            .and()
+            .body(containsString("Hello World"));
+        //GET
+        given()
+             .accept(ContentType.TEXT)
+             .filter(sessionFilter)
+        .when()
+            .get("/session/get")
+        .then()
+            .statusCode(200)
+            .and()
+            .contentType(ContentType.TEXT)
+            .and()
+            .body(containsString("Hello World"));
+        //DELETE
+        given()
+             .accept(ContentType.TEXT)
+             .filter(sessionFilter)
+        .when()
+            .get("/session/delete")
+        .then()
+            .statusCode(200)
+            .and()
+            .contentType(ContentType.TEXT)
+            .and()
+            .body(containsString("Hello World"));
+        //GET
+        given()
+             .accept(ContentType.TEXT)
+             .filter(sessionFilter)
+        .when()
+            .get("/session/get")
+        .then()
+            .statusCode(200)
+            .and()
+            .contentType(ContentType.TEXT)
+            .and()
+            .body(isEmptyString());
     }
 
 }

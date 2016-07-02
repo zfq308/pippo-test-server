@@ -9,7 +9,9 @@ public class PippoApplication extends Application {
         getRouter().ignorePaths("/favicon.ico");
 
         // send a text 'Hello World' as response
-        GET("/text", (routeContext) -> routeContext.text().send("Hello World"));
+        GET("/text", (routeContext) -> {
+            routeContext.text().send("Hello World");
+        });
 
         // send a json as response
         GET("/json", (routeContext) -> {
@@ -30,6 +32,23 @@ public class PippoApplication extends Application {
         GET("/template", (routeContext) -> {
             routeContext.setLocal("greeting", "Hello");
             routeContext.render("hello");
+        });
+
+        // test session set
+        GET("/session/set", (routeContext) -> {
+            String value = routeContext.setSession("KEY", "Hello World");
+            routeContext.text().send(value);
+        });
+
+        // test session get
+        GET("/session/get", (routeContext) -> {
+            routeContext.text().send(routeContext.<String>getSession("KEY"));
+        });
+
+        // test session delete
+        GET("/session/delete", (routeContext) -> {
+            String value = routeContext.removeSession("KEY");
+            routeContext.text().send(value);
         });
     }
 
