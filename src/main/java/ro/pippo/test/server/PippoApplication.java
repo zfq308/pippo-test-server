@@ -62,6 +62,7 @@ public class PippoApplication extends Application {
         return new Contact(12345, "John", "0733434435", "Sunflower Street, No. 6");
     }
     
+    // You can remove the following lines if you are testing with the normal session mechanism
     @Override
     protected RequestResponseFactory createRequestResponseFactory() {
         SessionDataStorage sessionDataStorage = new EhcacheSessionDataStorage();

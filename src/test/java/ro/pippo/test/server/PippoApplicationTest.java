@@ -116,6 +116,7 @@ public class PippoApplicationTest extends PippoTest {
     @Test
     public void testSession() {
         SessionFilter sessionFilter = new SessionFilter();
+        //Only if you are using a pippo session module with CookieSessionStrategy
         RestAssured.config = RestAssured.config().sessionConfig(new SessionConfig().sessionIdName("SESSIONID"));
         //SET
         given()
