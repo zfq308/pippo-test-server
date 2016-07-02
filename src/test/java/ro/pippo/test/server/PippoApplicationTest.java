@@ -1,5 +1,7 @@
 package ro.pippo.test.server;
 
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.config.SessionConfig;
 import ro.pippo.test.server.PippoApplication;
 import com.jayway.restassured.filter.session.SessionFilter;
 import com.jayway.restassured.http.ContentType;
@@ -114,6 +116,7 @@ public class PippoApplicationTest extends PippoTest {
     @Test
     public void testSession() {
         SessionFilter sessionFilter = new SessionFilter();
+        RestAssured.config = RestAssured.config().sessionConfig(new SessionConfig().sessionIdName("SESSIONID"));
         //SET
         given()
              .accept(ContentType.TEXT)

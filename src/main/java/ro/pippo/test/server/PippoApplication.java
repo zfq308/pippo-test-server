@@ -1,6 +1,12 @@
 package ro.pippo.test.server;
 
+import net.sf.ehcache.CacheManager;
 import ro.pippo.core.Application;
+import ro.pippo.core.RequestResponseFactory;
+import ro.pippo.session.SessionDataStorage;
+import ro.pippo.session.SessionManager;
+import ro.pippo.session.SessionRequestResponseFactory;
+import ro.pippo.session.ehcache.EhcacheSessionDataStorage;
 
 public class PippoApplication extends Application {
 
@@ -54,6 +60,19 @@ public class PippoApplication extends Application {
 
     private Contact createContact() {
         return new Contact(12345, "John", "0733434435", "Sunflower Street, No. 6");
+    }
+    
+    @Override
+    protected RequestResponseFactory createRequestResponseFactory() {
+        SessionDataStorage sessionDataStorage = new EhcacheSessionDataStorage();
+        SessionManager sessionManager = new SessionManager(sessionDataStorage);
+
+        return new SessionRequestResponseFactory(this, sessionManager);
+    }
+
+    @Override
+    protected void onDestroy() {
+        CacheManager.getInstance().shutdown();
     }
 
 }

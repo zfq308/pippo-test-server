@@ -10,7 +10,7 @@
         <filter-class>ro.pippo.core.PippoFilter</filter-class>
         <init-param>
             <param-name>applicationClassName</param-name>
-            <param-value>org.habv.test.pippo.test.server.PippoApplication</param-value>
+            <param-value>ro.pippo.test.server.PippoApplication</param-value>
         </init-param>
         <!--
         <init-param>
