@@ -1,5 +1,6 @@
-package org.habv.test.pippo.test.server;
+package ro.pippo.test.server;
 
+import ro.pippo.test.server.PippoApplication;
 import com.jayway.restassured.filter.session.SessionFilter;
 import com.jayway.restassured.http.ContentType;
 import org.junit.Test;

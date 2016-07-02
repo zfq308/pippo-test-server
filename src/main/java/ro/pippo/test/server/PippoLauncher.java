@@ -1,4 +1,4 @@
-package org.habv.test.pippo.test.server;
+package ro.pippo.test.server;
 
 import ro.pippo.core.Pippo;
 
